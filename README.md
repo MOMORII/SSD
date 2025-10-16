@@ -14,7 +14,7 @@
 This repository contains the development of our S.S.D GROUP COURSEWORK ASSIGNMENT 'PASSWORD HYGIENE COACH'. The project is built in Flutter using Visual Studio Code (VSC), it follows professional development practices. In addition to this, we have included numerous files evidencing our commitment to producing well-structured, organised deliverables. Using a Kanban board, we allocated tasks between us fairly and equally amongst ourselves.
 
 ## Project Overview
-The following information will aim to summarise project information in accordance with the 'Software Architecture & Design' project specification.
+The following information will aim to summarise project information in accordance with the 'Secure Software Development' assignment specification.
 
 ### Team Member Roles:
 - **FRONTEND**: MAAHIA, KEISHA
@@ -45,10 +45,10 @@ This details the technology stack we aim to implement into our FRONTEND, BACKEND
 -	GitHub Project and Kanban Boards as our main PM tools
 
 ### Development Approach
-We are following the 'Scrum' methodology, using GitHub Project for task management and sprint tracking. Our main programming language will be JavaScript and 'IntelliJ IDEA' will be the IDE we develop the program in. Our team aims to maintain regular communications through a WhatsApp groupchat for quick updates on current progress, and, 'Microsoft Teams' for weekly team meetings.
+We are following the 'Scrum' methodology, using GitHub Project for task management and sprint tracking. Our main programming language will be done within 'Flutter' and 'Visual Studio Code' will be the IDE we develop the program in. Our team aims to maintain regular communications through a WhatsApp groupchat for quick updates on current progress, and, 'Microsoft Teams' for weekly team meetings.
 
 ## Kanban board
-This is the Kanban board we use to track progress, organise tasks, and ensure smooth workflow management. Each column represents a different stage of the process, helping us visualise work in progress and prioritise tasks effectively. (((INSERT KANBAN BOARD LINK HERE )))
+This is the Kanban board we use to track progress, organise tasks, and ensure smooth workflow management. Each column represents a different stage of the process, helping us visualise work in progress and prioritise tasks effectively. ((( INSERT KANBAN BOARD LINK HERE )))
 
 ## Conclusion
 As a team, we were able to effectively distribute task responsibilities amongst ourselves and work towards meeting our weekly planned objectives outlined in the coursework assignment brief. Through clear and consistent communication via WhatsApp and Microsoft Teams, we utilised GitHub, VSC, and Flutter to achieve our development goals efficiently.

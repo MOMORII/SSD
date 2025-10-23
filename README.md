@@ -1,17 +1,19 @@
 (CMP-X306-0) Secure Software Development
 # CSWRK: PASSWORD HYGIENE COACH
-### Written by. " (working groupname) "
+### Written by. Mahbouba, Keisha, Maahia, Hala & Artem
 
 ## G6-SAD Group Member Details
-- Mahbouba Rezaei (REZ23579670)
+- Mahbouba Rezaei (REZ23579670) [GitHub Profile](https://github.com/M12rezaei)
 - Keisha Geyrozaga (GEY23581805) [GitHub Profile](https://github.com/MOMORII)
-- Maahia Rahman (RAH23614335)
+- Maahia Rahman (RAH23614335) [GitHub Profile](https://github.com/maahiarahman)
 - Hala Bakhtiar (BAK23592238) [GitHub Profile](https://github.com/BAK23592238)
-- Artem Shkurat (SHK22612576) 
+- Artem Shkurat (SHK22612576) [GitHub Profile](https://github.com/ArtemShkurat)
 
   
 ## Repository Information
-This repository contains the development of our S.S.D GROUP COURSEWORK ASSIGNMENT 'PASSWORD HYGIENE COACH'. The project is built in Flutter using Visual Studio Code (VSC), it follows professional development practices. In addition to this, we have included numerous files evidencing our commitment to producing well-structured, organised deliverables. Using a Kanban board, we allocated tasks between us fairly and equally amongst ourselves.
+This repository contains the development of our S.S.D GROUP COURSEWORK ASSIGNMENT 'PASSWORD HYGIENE COACH'. The project is built in Flutter using Dart as our main programming language for backend work & Visual Studio Code (VSC), it follows professional development practices. In addition to this, we have included numerous files evidencing our commitment to producing well-structured, organised deliverables. Using a Kanban board, we allocated tasks between us fairly and equally amongst ourselves.
+
+All information below comprises all relevant project information from both our solution design document (SDD) and supporting module content.
 
 ## Project Overview
 The following information will aim to summarise project information in accordance with the 'Secure Software Development' assignment specification.

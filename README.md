@@ -19,8 +19,8 @@ All information below comprises all relevant project information from both our s
 The following information will aim to summarise project information in accordance with the 'Secure Software Development' assignment specification.
 
 ### Team Member Roles:
-- **FRONTEND**: MAAHIA, KEISHA
-- **BACKEND**: MAHBOUBA, HALA, ARTEM
+- **FRONTEND**: MAAHIA, ARTEM
+- **BACKEND**: MAHBOUBA, HALA, KEISHA
 
 ### Project Summary
 This document intends to outline the design of a ‘PASSWORD HYGEINE COACH’ that will help users generate strong passwords, assess strength, and adopt effective password protection practices without sending secrets to a server. We aim to be able to create a user-centred mobile software application that allows us to teach users how to effectively deploy secure passwords, assess user-suggested password strength/security, & help users deploy password protection practices into their day-to-day lives.
@@ -50,7 +50,7 @@ This details the technology stack we aim to implement into our FRONTEND, BACKEND
 We are following the 'Scrum' methodology, using GitHub Project for task management and sprint tracking. Our main programming language will be done within 'Flutter' and 'Visual Studio Code' will be the IDE we develop the program in. Our team aims to maintain regular communications through a WhatsApp groupchat for quick updates on current progress, and, 'Microsoft Teams' for weekly team meetings.
 
 ## Kanban board
-This is the Kanban board we use to track progress, organise tasks, and ensure smooth workflow management. Each column represents a different stage of the process, helping us visualise work in progress and prioritise tasks effectively. ((( INSERT KANBAN BOARD LINK HERE )))
+This is the Kanban board we use to track progress, organise tasks, and ensure smooth workflow management. Each column represents a different stage of the process, helping us visualise work in progress and prioritise tasks effectively. [SSD KANBAN BOARD](https://github.com/users/MOMORII/projects/3/views/1?system_template=kanban)
 
 ## Conclusion
 As a team, we were able to effectively distribute task responsibilities amongst ourselves and work towards meeting our weekly planned objectives outlined in the coursework assignment brief. Through clear and consistent communication via WhatsApp and Microsoft Teams, we utilised GitHub, VSC, and Flutter to achieve our development goals efficiently.

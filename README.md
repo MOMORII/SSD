@@ -19,8 +19,8 @@ All information below comprises all relevant project information from both our s
 The following information will aim to summarise project information in accordance with the 'Secure Software Development' assignment specification.
 
 ### Team Member Roles:
-- **FRONTEND**: MAAHIA, ARTEM
-- **BACKEND**: MAHBOUBA, HALA, KEISHA
+- **FRONTEND**: MAAHIA, KEISHA
+- **BACKEND**: MAHBOUBA, HALA, ARTEM
 
 ### Project Summary
 This document intends to outline the design of a ‘PASSWORD HYGEINE COACH’ that will help users generate strong passwords, assess strength, and adopt effective password protection practices without sending secrets to a server. We aim to be able to create a user-centred mobile software application that allows us to teach users how to effectively deploy secure passwords, assess user-suggested password strength/security, & help users deploy password protection practices into their day-to-day lives.

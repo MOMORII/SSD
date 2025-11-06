@@ -1,13 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-<<<<<<< HEAD
 // Only keep platform-specific SQLite imports necessary for main initialization
 import 'package:sqflite_common_ffi/sqflite_ffi.dart'; 
-=======
+
 // 🆕: imports new home screen
 import 'screens/home_screen.dart';
->>>>>>> aba089e12be431ec2bce8e2252743ab834a6e626
 
 import 'screens/LessonCoachScreen.dart';
 

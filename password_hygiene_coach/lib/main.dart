@@ -9,6 +9,8 @@ import 'screens/home_screen.dart';
 
 import 'screens/LessonCoachScreen.dart';
 
+import 'screens/StrengthFeedback.dart';
+
 // Only keep platform-specific SQLite imports necessary for main initialization
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';

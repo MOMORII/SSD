@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Password Hygiene Coach'),
         centerTitle: false,
 
-        // 🔝 TOP NAV BAR (under the app bar)
+        //Top navigation bar
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(56),
           child: _TopMenuBar(
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
 
-      // 🌈 colorful background
+      // background colouring
       body: Stack(
         children: [
           Container(

@@ -1,0 +1,276 @@
+/* Basic reset for styling consistency */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
+/* Header and menu container styling */
+header {
+  width: 100%; /* Ensures the header spans the full width of the viewport */
+}
+
+.menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* This will push the logo to one side and the menu to the other */
+  background-color: #004544;
+  color: white;
+  padding: 15px 20px;
+}
+
+/* Logo link styling to ensure it doesn't shrink and is clickable */
+.logo-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.icon-container {
+  display: flex;  /* Aligns icons in a row */
+  justify-content: center;  /* Centers icons horizontally if there's extra space */
+  align-items: center;  /* Aligns icons vertically */
+}
+
+.menu-icon {
+  margin-right: 10px;  /* Adjusts the space between icons */
+  height: 40px;  /* Ensures consistent icon size */
+  width: auto;  /* Maintains aspect ratio */
+}
+
+.menu-icon:last-child {
+  margin-right: 0;  /* Removes margin from the last icon */
+}
+
+/* Logo image styling */
+.logo {
+  height: 45px;
+}
+
+/* Main menu styling */
+.main-menu {
+  display: flex;
+  align-items: center; /* Vertically center the menu items */
+  justify-content: flex-end;
+  width: 100%;
+  padding-right: 20px;
+
+}
+.main-menu ul {
+  display: flex;
+  list-style-type: none; /* Removes bullet points */
+  padding: 0;
+  margin: 0;
+}
+
+/* List item styling */
+.main-menu li {
+  margin-left: 2px; /* Adds spacing between menu items */
+  font-size: 14px;
+}
+
+/* Link styling */
+.main-menu a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+.main-menu a:hover {
+  color: #4eb8ff; /* Hover effect */
+}
+
+
+/* Initially hide the dropdown */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 83px; /* Adjust as needed */
+  right: 0;  /* Align to the right side */
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#search-btn:focus + .dropdown,
+#search-btn:active + .dropdown {
+  display: block;
+}
+
+/* Style for the search input and button */
+#search-input {
+  width: 200px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 5px 10px;
+}
+
+
+.brand-body-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px; /* Adjusts the height */
+  width: auto;  /* Adjusts the width */
+}
+
+.brand-body-container img {
+  height: 100%; /* Fits the image to the container's height */
+  width: auto;  /* Keeps the image's aspect ratio intact */
+}
+
+
+/* Footer styling to keep it consistent and neat */
+footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #222;
+  color: white;
+  flex-shrink: 0;
+}
+
+/* Main content styling */
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+/*catalogue home page */
+/* Catalog Container */
+.catalog {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Product Card Styling */
+.product {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background: white;
+  padding: 10px;
+  margin: 10px;
+  width: 250px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product:hover {
+  transform: translateY(-5px); /* Slight raise effect on hover */
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+  max-height: 300px; /* Limit image height */
+  object-fit: cover; /* Ensures images cover the area nicely without distortion */
+}
+
+.product h2 {
+  margin: 10px 0 5px;
+  color: #333;
+}
+
+.product p {
+  color: #666;
+}
+
+/* Pagination Styling */
+nav.pagination {
+  display: flex;
+  justify-content: center; /* Centers the pagination nav */
+  margin: 20px 0;
+}
+
+.pagination a {
+  padding: 8px 16px;
+  margin: 0 5px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px; /* Rounded corners for the links */
+  font-weight: bold;
+}
+
+.pagination a:hover {
+  background-color: #0056b3; /* Darker on hover for better interaction feedback */
+}
+
+
+/* Hide mobile menu on larger screens */
+nav.mobile-menu {
+  display: none;
+}
+
+
+/* Mobile and small screens: Hide the default menu and show a dropdown button */
+
+@media (max-width: 1024px) {
+  /* Hide main menu and show mobile menu */
+  nav.main-menu {
+    display: none;
+  }
+
+  nav.mobile-menu {
+    display: block;
+    position: relative;
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-right: 2%;
+  }
+
+  .dropdown-main-menu {
+    position: relative;
+    list-style-type: none;
+  }
+
+  .dropdown-toggle {
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    background-color: #145fb5; /* Example background color */
+    display: block;
+    list-style-type: none;
+  }
+
+  .dropdown-list {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9; /* Light background for dropdown items */
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 100;
+  }
+
+  /* List item styling within the dropdown */
+  .dropdown-list li a {
+    color: #333; /* Dark color for text */
+    padding: 10px 15px;
+    display: block; /* Ensures full width usage */
+    text-decoration: none; /* No underlines */
+    background-color: #FFFFFF; /* Background color */
+    border-bottom: 1px solid #E0E0E0; /* Adds a separator between items */
+}
+
+    /* Hover effect for dropdown items */
+    .dropdown-list li a:hover {
+      background-color: #F5F5F5; /* Light grey background on hover */
+      color: #6A1B9A; /* Change text color on hover */
+  }
+
+  .dropdown-main-menu:hover .dropdown-list {
+    display: block;
+  }
+}

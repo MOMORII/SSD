@@ -72,8 +72,9 @@ class PasswordGenerator {
 
       // Add one required character from each set
       for (String set in requiredChars) {
-        if (buffer.length < length) 
-        buffer.write(set[random.nextInt(set.length)]);
+        if (buffer.length < length) {
+          buffer.write(set[random.nextInt(set.length)]);
+        }
       }
 
       

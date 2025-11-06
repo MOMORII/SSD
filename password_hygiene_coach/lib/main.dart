@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Only keep platform-specific SQLite imports necessary for main initialization
-import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart'; 
 
 import 'screens/LessonCoachScreen.dart';

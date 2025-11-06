@@ -1,7 +1,7 @@
 import 'dart:convert'; // Import for JSON encoding/decoding operations
 import 'package:flutter/material.dart'; // Import for using Flutter widgets and types like IconData
 import 'quiz.dart'; // Imports the 'Quiz' class definition (assumed location)
-import 'package:flutter/foundation.dart'; // For the debugPrint function, useful for logging in development
+// For the debugPrint function, useful for logging in development
 
 /// Defines the structure for a single lesson within the application.
 class Lesson {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'LessonCoachScreen.dart';
+import 'password_generator_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -43,9 +44,12 @@ class HomeScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (_) => const LessonCoachScreen()),
               );
             },
-            onGenerator: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Password Generator coming soon!')),
-            ),
+            onGenerator: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const PasswordGeneratorScreen()),
+              );
+            },
             onTester: () => ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Password Strength Tester coming soon!')),
             ),
@@ -140,9 +144,12 @@ class HomeScreen extends StatelessWidget {
                                 icon: Icons.password_rounded,
                                 title: 'Password Generator',
                                 subtitle: 'Create strong, unique passwords instantly',
-                                onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Password Generator coming soon!')),
-                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (_) => const PasswordGeneratorScreen()),
+                                  );
+                                },
                               ),
                               _FeatureCard(
                                 color: theme.colorScheme.secondary,

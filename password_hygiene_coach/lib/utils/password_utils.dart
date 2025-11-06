@@ -16,7 +16,7 @@ class PasswordStrength {
     if (password.contains(RegExp(r'[a-z]'))) poolSize += Charsets.lowercase.length;
     if (password.contains(RegExp(r'[A-Z]'))) poolSize += Charsets.uppercase.length;
     if (password.contains(RegExp(r'[0-9]'))) poolSize += Charsets.numbers.length;
-    if (password.contains(RegExp(r'[!@#\$%^&*()\-\_=+\[\]{}|;:,.<>?/~`]'))) poolSize += Charsets.symbols.length;
+    if (password.contains(RegExp(r'[!@#\$%^&*()-_=+[]{}|;:,.<>?/~`]'))) poolSize += Charsets.symbols.length;
     if (poolSize == 0) return 0.0;
 
     // L * log2(N)
@@ -46,46 +46,46 @@ class PasswordStrength {
 }
 
 class PasswordGenerator {
-    static String generate ({
-      required int length,
-      required bool useLowercase,
-      required bool useUppercase,
-      required bool useNumbers,
-      required bool useSymbols,
-    }) {
-      String charPool = '';
-      if (useLowercase) charPool += Charsets.lowercase;
-      if (useUppercase) charPool += Charsets.uppercase; 
-      if (useNumbers) charPool += Charsets.numbers;
-      if (useSymbols) charPool += Charsets.symbols;
+  static String generate ({
+    required int length,
+    required bool useLowercase,
+    required bool useUppercase,
+    required bool useNumbers,
+    required bool useSymbols,
+  }) {
+    String charPool = '';
+    if (useLowercase) charPool += Charsets.lowercase;
+    if (useUppercase) charPool += Charsets.uppercase; 
+    if (useNumbers) charPool += Charsets.numbers;
+    if (useSymbols) charPool += Charsets.symbols;
 
-      // Use a cryptographically secure random number generator
-      final random = Random.secure();
-      final buffer= StringBuffer();
+    // Use a cryptographically secure random number generator
+    final random = Random.secure();
+    final buffer= StringBuffer();
 
-      // Ensure at least one character from each selected set is used
-      final requiredChars = <String>[];
-      if (useLowercase) requiredChars.add(Charsets.lowercase);
-      if (useUppercase) requiredChars.add(Charsets.uppercase);
-      if (useNumbers) requiredChars.add(Charsets.numbers);
-      if (useSymbols) requiredChars.add(Charsets.symbols);
+    // Ensure at least one character from each selected set is used
+    final requiredChars = <String>[];
+    if (useLowercase) requiredChars.add(Charsets.lowercase);
+    if (useUppercase) requiredChars.add(Charsets.uppercase);
+    if (useNumbers) requiredChars.add(Charsets.numbers);
+    if (useSymbols) requiredChars.add(Charsets.symbols);
 
-      // Add one required character from each set
-      for (String set in requiredChars) {
-        if (buffer.length < length) 
-        buffer.write(set[random.nextInt(set.length)]);
-      }
-
-      
-    // Fill the rest of the length from the complete charpool
-    while (buffer.length < length) {
-      buffer.write(charPool[random.nextInt(charPool.length)]);
+    // Add one required character from each set
+    for (String set in requiredChars) {
+      if (buffer.length < length) 
+      buffer.write(set[random.nextInt(set.length)]);
     }
 
-    // Shuffle the result to prevent predictable sequences
-    final resultList = buffer.toString().split('');
-    resultList.shuffle(random);
-
-    return resultList.join();
-    }
+    
+  // Fill the rest of the length from the complete charpool
+  while (buffer.length < length) {
+    buffer.write(charPool[random.nextInt(charPool.length)]);
   }
+
+  // Shuffle the result to prevent predictable sequences
+  final resultList = buffer.toString().split('');
+  resultList.shuffle(random);
+
+  return resultList.join();
+  }
+}

@@ -8,7 +8,6 @@ import 'package:sqflite/sqflite.dart';
 // 🆕: imports new home screen
 import 'screens/home_screen.dart';
 import 'screens/LessonCoachScreen.dart';
-import 'screens/StrengthFeedback.dart';
 
 // --- MAIN APP ENTRY POINT ---
 /// The root widget of the application, defining its structure and theme.
@@ -25,14 +24,8 @@ class PasswordHygieneCoachApp extends StatelessWidget {
         useMaterial3: true, // Enables the latest Material Design 3 features and styling.
       ),
 
-      // 👇 ADD THIS LINE: start app on HomeScreen
-      initialRoute: '/home',
+      home: const HomeScreen(),
 
-      home: const LessonCoachScreen(), // Kept as-is; ignored when initialRoute is set
-      // 🆕: named route for HomeScreen
-      routes: {
-        '/home': (context) => const HomeScreen(),
-      },
     );
   }
 }

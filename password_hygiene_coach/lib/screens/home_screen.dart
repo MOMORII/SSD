@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:password/screens/StrengthFeedback.dart';
 import 'LessonCoachScreen.dart';
 import 'password_generator_screen.dart';
 
@@ -50,9 +51,12 @@ class HomeScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (_) => const PasswordGeneratorScreen()),
               );
             },
-            onTester: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Password Strength Tester coming soon!')),
-            ),
+            onTester: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const StrengthFeedbackScreen()),
+              );
+            },
           ),
         ),
       ),
@@ -156,9 +160,12 @@ class HomeScreen extends StatelessWidget {
                                 icon: Icons.security_rounded,
                                 title: 'Strength Tester',
                                 subtitle: 'Check how secure your passwords really are',
-                                onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Password Strength Tester coming soon!')),
-                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (_) => const StrengthFeedbackScreen()),
+                                  );
+                                },
                               ),
                               _FeatureCard(
                                 color: theme.colorScheme.error,

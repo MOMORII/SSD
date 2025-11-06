@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+// Only keep platform-specific SQLite imports necessary for main initialization
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite/sqflite.dart';
+
 // 🆕: imports new home screen
 import 'screens/home_screen.dart';
-
 import 'screens/LessonCoachScreen.dart';
-
-// Only keep platform-specific SQLite imports necessary for main initialization
-import 'package:sqflite/sqflite.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'screens/StrengthFeedback.dart';
 
 // --- MAIN APP ENTRY POINT ---
 /// The root widget of the application, defining its structure and theme.

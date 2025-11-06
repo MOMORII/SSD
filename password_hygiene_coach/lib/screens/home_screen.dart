@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'LessonCoachScreen.dart';
+import 'StrengthFeedback.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -46,9 +47,15 @@ class HomeScreen extends StatelessWidget {
             onGenerator: () => ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Password Generator coming soon!')),
             ),
-            onTester: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Password Strength Tester coming soon!')),
-            ),
+            onTester: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const StrengthFeedbackScreen()),
+              );
+            }
+            //=> ScaffoldMessenger.of(context).showSnackBar(
+           //   const SnackBar(content: Text('Password Strength Tester coming soon!')),
+           // ),
           ),
         ),
       ),

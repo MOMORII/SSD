@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'dart:math' as math;
 import '../utils/password_utils.dart';
 
 /// --- MAIN CONTROLLER SCREEN ---
@@ -65,36 +65,6 @@ class _StrengthFeedbackScreenState extends State<StrengthFeedbackScreen> {
 
   void _onPasswordChanged(String v) => _updateMetrics(v);
 
-  Future<void> _generatePassword() async {
-    final generated = PasswordGenerator.generate(
-      length: 16,
-      useLowercase: true,
-      useUppercase: true,
-      useNumbers: true,
-      useSymbols: true,
-    );
-    _updateMetrics(generated);
-
-    // show generated password and offer to copy
-    await showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Generated password'),
-        content: SelectableText(generated),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Clipboard.setData(ClipboardData(text: generated));
-              Navigator.pop(ctx);
-            },
-            child: const Text('Copy'),
-          ),
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Close')),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<void>(
@@ -117,19 +87,9 @@ class _StrengthFeedbackScreenState extends State<StrengthFeedbackScreen> {
                   decoration: InputDecoration(
                     labelText: 'Enter password',
                     border: const OutlineInputBorder(),
-                    suffixIcon: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
-                          onPressed: () => setState(() => _obscure = !_obscure),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.autorenew),
-                          tooltip: 'Generate',
-                          onPressed: _generatePassword,
-                        ),
-                      ],
+                    suffixIcon: IconButton(
+                      icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
+                      onPressed: () => setState(() => _obscure = !_obscure),
                     ),
                   ),
                 ),
@@ -149,32 +109,51 @@ class _StrengthFeedbackScreenState extends State<StrengthFeedbackScreen> {
                   ],
                 ),
                 const SizedBox(height: 12),
-                // Simple suggestions based on missing character classes and length
                 Align(alignment: Alignment.centerLeft, child: Text('Suggestions:', style: Theme.of(context).textTheme.titleMedium)),
                 const SizedBox(height: 6),
-                ..._buildSuggestions(),
-                const Spacer(),
-                ElevatedButton.icon(
-                  onPressed: _password.isEmpty
-                      ? null
-                      : () {
-                          showDialog(
-                            context: context,
-                            builder: (_) => AlertDialog(
-                              title: const Text('Password analyzed'),
-                              content: Text('Strength: $_label\nEntropy: ${_entropy.toStringAsFixed(1)} bits'),
-                              actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
-                            ),
-                          );
-                        },
-                  icon: const Icon(Icons.check),
-                  label: const Text('Analyze'),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: _buildSuggestions(),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                // Gauge/Speedometer widget at bottom
+                SizedBox(
+                  height: 180,
+                  child: _buildGauge(),
                 ),
               ],
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget _buildGauge() {
+    return CustomPaint(
+      painter: GaugePainter(
+        progress: _progress,
+        color: _color,
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 28),
+            Text(
+              _label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: _color,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -199,5 +178,93 @@ class _StrengthFeedbackScreenState extends State<StrengthFeedbackScreen> {
               ],
             ))
         .toList();
+  }
+}
+
+/// Custom painter for the gauge/speedometer
+class GaugePainter extends CustomPainter {
+  final double progress; // 0.0 to 1.0
+  final Color color;
+
+  GaugePainter({required this.progress, required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = math.min(size.width, size.height) / 2;
+
+    const double startAngle = -math.pi; // left
+    const double totalArc = math.pi; // semicircle
+    const int segments = 5;
+    const double gap = 0.06; // gap between segments (radians)
+    final double totalGaps = gap * (segments - 1);
+    final double sweepPerSegment = (totalArc - totalGaps) / segments;
+    final double filledAngle = totalArc * progress;
+
+    // Draw gray background arcs
+    final Paint bgPaint = Paint()
+      ..color = Colors.grey.shade300
+      ..strokeWidth = 12
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.butt;
+
+    for (int i = 0; i < segments; i++) {
+      final double segStart = startAngle + i * (sweepPerSegment + gap);
+      canvas.drawArc(Rect.fromCircle(center: center, radius: radius), segStart, sweepPerSegment, false, bgPaint);
+    }
+
+    // Draw filled colored portion (use password strength color directly)
+    final Paint fgPaint = Paint()
+      ..color = color
+      ..strokeWidth = 12
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), startAngle, filledAngle, false, fgPaint);
+
+    // Needle
+    final double needleAngle = startAngle + filledAngle;
+    final Offset needleEnd = Offset(
+      center.dx + radius * 0.72 * math.cos(needleAngle),
+      center.dy + radius * 0.72 * math.sin(needleAngle),
+    );
+    final Paint needlePaint = Paint()
+      ..color = Colors.black87
+      ..strokeWidth = 3
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(center, needleEnd, needlePaint);
+
+    // Center cap
+    final Paint capStroke = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+    final Paint capFill = Paint()..color = color;
+    canvas.drawCircle(center, radius * 0.08, capStroke);
+    canvas.drawCircle(center, radius * 0.06, capFill);
+
+    // Numeric labels
+    final List<String> labels = ['0', '25', '50', '75', '100'];
+    for (int i = 0; i < labels.length; i++) {
+      final double pos = i / (labels.length - 1);
+      final double angle = startAngle + totalArc * pos;
+      final Offset labelPos = Offset(
+        center.dx + (radius + radius * 0.16) * math.cos(angle),
+        center.dy + (radius + radius * 0.16) * math.sin(angle),
+      );
+      final textPainter = TextPainter(
+        text: TextSpan(
+          text: labels[i],
+          style: const TextStyle(color: Colors.black54, fontSize: 9, fontWeight: FontWeight.bold),
+        ),
+        textDirection: TextDirection.ltr,
+      );
+      textPainter.layout();
+      textPainter.paint(canvas, labelPos - Offset(textPainter.width / 2, textPainter.height / 2));
+    }
+  }
+
+  @override
+  bool shouldRepaint(GaugePainter oldDelegate) {
+    return oldDelegate.progress != progress || oldDelegate.color != color;
   }
 }

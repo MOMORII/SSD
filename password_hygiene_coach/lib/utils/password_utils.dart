@@ -26,9 +26,9 @@ class PasswordStrength {
 
   // Converts entropy bits to a visual strength level
   static String getStrengthLabel(double entropy) {
-    if (entropy < 30) return 'Very Weak';
-    if (entropy < 60) return 'Weak';
-    if (entropy < 80) return 'Moderate';
+    if (entropy < 25) return 'Very Weak';
+    if (entropy < 50) return 'Weak';
+    if (entropy < 75) return 'Moderate';
     if (entropy < 100) return 'Strong';
     return 'Very Strong';
   }
@@ -36,9 +36,9 @@ class PasswordStrength {
   // Converts entropy bits to a color for meter
 
   static Color getStrengthColor(double entropy) {
-    if (entropy < 30) return Color(0xFFFF0000); // Red
-    if (entropy < 60) return Color(0xFFFFA500); // Orange
-    if (entropy < 80) return Color(0xFFFFFF00); // Yellow
+    if (entropy < 25) return Color(0xFFFF0000); // Red
+    if (entropy < 50) return Color(0xFFFFA500); // Orange
+    if (entropy < 75) return Color.fromARGB(255, 243, 227, 48); // Yellow
     if (entropy < 100) return Color(0xFF9ACD32); // YellowGreen
     return Color(0xFF008000); // Green
   } 

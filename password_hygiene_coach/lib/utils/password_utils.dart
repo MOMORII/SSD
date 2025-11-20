@@ -88,4 +88,29 @@ class PasswordGenerator {
 
   return resultList.join();
   }
+
+  static String generateWithInput({
+    required int length,
+    required String input,
+  }) {
+    final random = Random.secure();
+    final defaults =
+        Charsets.lowercase + Charsets.uppercase + Charsets.numbers + Charsets.symbols;
+
+    // Step 1: If user input is shorter, fill with random defaults
+    String pool = input;
+    while (pool.length < length) {
+      pool += defaults[random.nextInt(defaults.length)];
+    }
+
+    // Step 2: Trim if longer (the UI already warns)
+    if (pool.length > length) {
+      pool = pool.substring(0, length);
+    }
+
+    // Step 3: Shuffle for randomness
+    final chars = pool.split('');
+    chars.shuffle(random);
+    return chars.join();
+  }
 }

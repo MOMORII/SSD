@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../utils/password_utils.dart';
-import '../utils/constants.dart';
 
 class PasswordGeneratorWidget extends StatefulWidget {
   const PasswordGeneratorWidget({super.key});
@@ -13,34 +12,42 @@ class PasswordGeneratorWidget extends StatefulWidget {
 
 class _PasswordGeneratorWidgetState extends State<PasswordGeneratorWidget> {
   int _length = 12;
-  String _letters = Charsets.lowercase + Charsets.uppercase;
-  String _numbers = Charsets.numbers;
-  String _symbols = Charsets.symbols;
+  bool _obscurePassword = true;
   String _password = '';
 
-  final _lettersController = TextEditingController();
-  final _numbersController = TextEditingController();
-  final _symbolsController = TextEditingController();
+  final _charactersController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _lettersController.text = _letters;
-    _numbersController.text = _numbers;
-    _symbolsController.text = _symbols;
+    // Leave empty — user will type their own characters.
   }
 
   void _generatePassword() {
-    setState(() {
-      _password = PasswordGenerator.generate(
-        length: _length,
-        useLowercase: true,
-        useUppercase: true,
-        useNumbers: true,
-        useSymbols: true,
-      );
-    });
+  // RAW user input (don’t substitute defaults yet)
+  final userInput = _charactersController.text; // no trim needed for length logic
+
+  // If the user typed more characters than the desired length -> error
+  if (userInput.length > _length) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Too many characters — reduce input or increase length.')),
+    );
+    return;
   }
+
+  // Pass the raw input (can be empty) to the generator.
+  // generateWithInput will fill any missing count with random defaults,
+  // and will use only defaults if input is empty.
+  final newPassword = PasswordGenerator.generateWithInput(
+    length: _length,
+    input: userInput,
+  );
+
+  setState(() {
+    _password = newPassword;
+  });
+}
+
 
   void _copyPassword() {
     if (_password.isEmpty) return;
@@ -52,9 +59,7 @@ class _PasswordGeneratorWidgetState extends State<PasswordGeneratorWidget> {
 
   @override
   void dispose() {
-    _lettersController.dispose();
-    _numbersController.dispose();
-    _symbolsController.dispose();
+    _charactersController.dispose();
     super.dispose();
   }
 
@@ -79,28 +84,17 @@ class _PasswordGeneratorWidgetState extends State<PasswordGeneratorWidget> {
               onChanged: (val) => setState(() => _length = val.toInt()),
             ),
             const SizedBox(height: 10),
+
+            // Single Characters field (empty by default)
             TextField(
-              controller: _lettersController,
+              controller: _charactersController,
               decoration: const InputDecoration(
-                labelText: 'Letters',
-                hintText: 'Enter letters to include (e.g., abcdef...)',
-              ),
-            ),
-            TextField(
-              controller: _numbersController,
-              decoration: const InputDecoration(
-                labelText: 'Numbers',
-                hintText: 'Enter numbers to include (e.g., 0123456789)',
-              ),
-            ),
-            TextField(
-              controller: _symbolsController,
-              decoration: const InputDecoration(
-                labelText: 'Symbols',
-                hintText: 'Enter symbols to include (e.g., !@#\$%^&*)',
+                labelText: 'Characters',
+                hintText: 'Enter characters to include (e.g., abcDEF123!@#)',
               ),
             ),
             const SizedBox(height: 20),
+
             Center(
               child: ElevatedButton.icon(
                 onPressed: _generatePassword,
@@ -109,9 +103,25 @@ class _PasswordGeneratorWidgetState extends State<PasswordGeneratorWidget> {
               ),
             ),
             const SizedBox(height: 20),
+
             if (_password.isNotEmpty) ...[
-              SelectableText(
-                _password,
+              TextFormField(
+                key: ValueKey(_password),
+                initialValue: _password,
+                readOnly: true,
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  labelText: 'Generated Password',
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
+                ),
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

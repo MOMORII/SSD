@@ -170,30 +170,6 @@ class _LessonSlidesViewerState extends State<LessonSlidesViewer> {
           },
         ),
 
-        // --- SWIPE ARROWS (Visual Indicators) ---
-        // Left Arrow
-        Positioned(
-          left: 20,
-          // Fades the arrow out if the user is on the first page.
-          child: AnimatedOpacity(
-            opacity: _currentPage > 0 ? 1 : 0.2, 
-            duration: const Duration(milliseconds: 300),
-            child: const Icon(Icons.arrow_back_ios_rounded,
-                color: Colors.white70, size: 32),
-          ),
-        ),
-        // Right Arrow
-        Positioned(
-          right: 20,
-          // Fades the arrow out if the user is on the last page.
-          child: AnimatedOpacity(
-            opacity: _currentPage < slides.length - 1 ? 1 : 0.2, 
-            duration: const Duration(milliseconds: 300),
-            child: const Icon(Icons.arrow_forward_ios_rounded,
-                color: Colors.white70, size: 32),
-          ),
-        ),
-
         // --- PAGE INDICATORS (DOTS) ---
         Positioned(
           // Adjusts position lower on the last slide to make room for buttons.

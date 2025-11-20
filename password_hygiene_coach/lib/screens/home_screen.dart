@@ -95,21 +95,19 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           _BigLogo(diameter: isWide ? 420 : 280),
                           SizedBox(width: isWide ? 28 : 0, height: isWide ? 0 : 20),
-                          Expanded(
-                            child: _TextPanel(
-                              height: isWide ? 260 : 220,
-                              child: Padding(
-                                padding: const EdgeInsets.all(22),
-                                child: Text(
-                                  'Welcome to KeyWise, a password hygiene coach application that helps you learn, build, and maintain strong and secure passwords. Through interactive lessons, quizzes, and tools like a password generator and strength tester, KeyWise guides you toward safer online habits and better digital security.',
-                                  style: theme.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 24, // 👈 Increased text size
-                                    color: theme.colorScheme.onSurface,
-                                    height: 1.4,
-                                  ),
-                                  textAlign: TextAlign.start,
+                          _TextPanel(
+                            height: isWide ? 240 : 200,
+                            child: Padding(
+                              padding: const EdgeInsets.all(22),
+                              child: Text(
+                                'Welcome to KeyWise, a password hygiene coach application that helps you learn, build, and maintain strong and secure passwords. Through interactive lessons, quizzes, and tools like a password generator and strength tester, KeyWise guides you toward safer online habits and better digital security.',
+                                style: theme.textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 24, // 👈 Increased text size
+                                  color: theme.colorScheme.onSurface,
+                                  height: 1.4,
                                 ),
+                                textAlign: TextAlign.start,
                               ),
                             ),
                           ),

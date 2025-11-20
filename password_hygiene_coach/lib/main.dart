@@ -7,7 +7,6 @@ import 'package:sqflite/sqflite.dart';
 
 // 🆕: imports new home screen
 import 'screens/home_screen.dart';
-import 'screens/LessonCoachScreen.dart';
 
 // --- MAIN APP ENTRY POINT ---
 /// The root widget of the application, defining its structure and theme.

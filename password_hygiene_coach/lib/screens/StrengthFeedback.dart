@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:math' as math;
 import '../utils/password_utils.dart';
 
@@ -39,6 +40,14 @@ class _StrengthFeedbackScreenState extends State<StrengthFeedbackScreen> {
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+    void _copyPassword() {
+    if (_password.isEmpty) return;
+    Clipboard.setData(ClipboardData(text: _password));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Password copied to clipboard!')),
+    );
   }
 
   Future<void> _loadResources() async {
@@ -87,18 +96,21 @@ class _StrengthFeedbackScreenState extends State<StrengthFeedbackScreen> {
                   decoration: InputDecoration(
                     labelText: 'Enter password',
                     border: const OutlineInputBorder(),
-                    suffixIcon: IconButton(
-                      icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
-                      onPressed: () => setState(() => _obscure = !_obscure),
+                    suffixIcon: Row(
+                      mainAxisSize: MainAxisSize.min, // <- important, so it doesn’t take full width
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.copy),
+                          tooltip: 'Copy password',
+                          onPressed: _copyPassword,
+                        ),
+                        IconButton(
+                          icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
+                          onPressed: () => setState(() => _obscure = !_obscure),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                const SizedBox(height: 12),
-                LinearProgressIndicator(
-                  value: _progress,
-                  color: _color,
-                  backgroundColor: Colors.grey.shade300,
-                  minHeight: 8,
                 ),
                 const SizedBox(height: 8),
                 Row(
@@ -141,17 +153,6 @@ class _StrengthFeedbackScreenState extends State<StrengthFeedbackScreen> {
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 28),
-            Text(
-              _label,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: _color,
-              ),
-            ),
-          ],
         ),
       ),
     );
